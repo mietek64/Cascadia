@@ -4,8 +4,8 @@ Thanks for your interest — contributions of any size are welcome.
 
 ## Ways to contribute
 
-- **Bug reports** — open an issue using the bug report template
-- **Feature requests** — open an issue using the feature request template
+- **Bug reports** — open an issue and describe what happened
+- **Feature requests** — open an issue and describe what you'd like to see
 - **Code changes** — fork, branch, pull request (see below)
 - **New presets** — got a great preset config? Share it in Discussions or submit a PR
 
@@ -54,7 +54,7 @@ terminal sizes and configs is the main verification method.
    - Give it a unique `id`, a good `name`, and a descriptive `desc`
    - Make sure all config keys you use exist in `DEFAULT_CONFIG`
 
-5. Test manually, open a PR, fill in the template.
+5. Test manually, open a PR, describe what you changed and why.
 
 ---
 
