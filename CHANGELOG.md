@@ -4,7 +4,7 @@ All notable changes are documented here.
 
 ---
 
-## [1.0.0] — 2025
+## [1.0.0] — 2026
 
 Initial public release.
 
