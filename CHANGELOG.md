@@ -4,6 +4,22 @@ All notable changes are documented here.
 
 ---
 
+## [1.1.0] — 2026
+
+### Added
+- `--install` flag — copies `matrix.exe` to `C:\tools\` and adds it to the user PATH
+  automatically via the Windows registry. No admin rights, no PowerShell scripts, no sysdm.cpl.
+- PowerShell one-liner install option documented in README
+
+### Changed
+- Version bumped to `1.1.0`
+- Updated `rich` dependency to `>=14.3.3`
+- Updated `pyfiglet` dependency to `>=1.0.4`
+- README install section rewritten with three options (built-in, one-liner, manual)
+- Linux/macOS pre-built binary removed from README — not yet available, source instructions provided instead
+
+---
+
 ## [1.0.0] — 2026
 
 Initial public release.
