@@ -148,6 +148,7 @@ Cascadia/
 ├── SECURITY.md
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md
+├── preview.gif
 └── .gitignore
 ```
 
