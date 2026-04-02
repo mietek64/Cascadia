@@ -3,9 +3,9 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.backends.legacy:build"
 
 [project]
-name        = "matrix-rain"
-version     = "1.1.0"
-description = "Matrix waterfall terminal animation"
+name        = "cascadia-rain"
+version     = "1.2.0"
+description = "Terminal rain animation"
 readme      = "README.md"
 license     = { file = "LICENSE" }
 requires-python = ">=3.13"
@@ -14,9 +14,9 @@ dependencies = [
     "pyfiglet>=1.0.4",
 ]
 
-# Registers  `matrix`  as a shell command when installed via  pip install -e .
+# Registers `cascadia` as a shell command when installed via pip install -e .
 [project.scripts]
-matrix = "matrix:main"
+cascadia = "main:main"
 
 [tool.setuptools]
-py-modules = ["matrix"]
+py-modules = ["main"]

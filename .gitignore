@@ -1,24 +1,23 @@
-# ── Python ────────────────────────────────────────────────────────────────────
+# Python
 __pycache__/
 *.py[cod]
 *.pyo
-*.pyd
 *.egg
 *.egg-info/
 MANIFEST
 
-# ── PyInstaller build output — never commit these ─────────────────────────────
+# PyInstaller — never commit build artifacts
 build/
 dist/
 *.spec
 
-# ── Virtual environments ──────────────────────────────────────────────────────
+# Virtual environments
 .venv/
 venv/
 env/
 .env/
 
-# ── IDE / editor ──────────────────────────────────────────────────────────────
+# IDE and editor files
 .vscode/
 .idea/
 *.sublime-project
@@ -27,13 +26,14 @@ env/
 *.swo
 *~
 
-# ── OS files ──────────────────────────────────────────────────────────────────
+# OS files
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# ── Personal config overrides (the config.json in the repo root is the
-#    default template — personal saves go to APPDATA/matrix, not here) ─────────
+# Personal config overrides
+# The config.json in the repo root is the default template.
+# Personal saves go to APPDATA/cascadia or ~/.config/cascadia, not here.
 local_config.json
 my_config.json
 *.theme.json

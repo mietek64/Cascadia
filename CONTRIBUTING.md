@@ -1,83 +1,46 @@
 # Contributing
 
-Thanks for your interest — contributions of any size are welcome.
+All contributions are welcome, whether that's a bug report, a new preset, a feature idea, or a code change.
 
-## Ways to contribute
+This is a personal side project, so response times may vary, but good pull requests will be reviewed and merged.
 
-- **Bug reports** — open an issue and describe what happened
-- **Feature requests** — open an issue and describe what you'd like to see
-- **Code changes** — fork, branch, pull request (see below)
-- **New presets** — got a great preset config? Share it in Discussions or submit a PR
+## Running from Source
 
-## Note on project scope
-
-This is a personal side project. Response times may vary. That said, good PRs will be reviewed and merged.
-
----
-
-## Development setup
-
-Requires **Python 3.13**.
+You need Python 3.13.
 
 ```bash
-git clone https://github.com/mietek64/Matrix
-cd Matrix
+git clone https://github.com/mietek64/Cascadia
+cd Cascadia
 pip install rich pyfiglet
-python matrix.py        # splash screen
-python matrix.py -s     # test the animation
-python matrix.py -c     # test the config editor
-python matrix.py -p     # test the preset browser
+python main.py
 ```
 
-No test suite — this is a visual terminal app. Manual testing across different
-terminal sizes and configs is the main verification method.
+There's no test suite. This is a visual terminal app, so the main way to verify a change is to run it and look at it across a few different terminal sizes and configs.
 
----
+## Making a Change
 
-## Making a change
+Fork the repo, create a branch off `main`, and keep each pull request focused on one thing.
 
-1. Fork the repo and create a branch off `main`:
-   ```bash
-   git checkout -b feat/my-thing
-   ```
+If you're adding a config option, add it to `DEFAULT_CONFIG`, add an entry to `SCHEMA` so it appears in the `-c` editor, and document it in the README options table. If it's interesting enough to be a preset, add it to `BUILTIN_PRESETS` too.
 
-2. Keep each PR focused — one feature or fix per PR.
+If you're adding a preset, give it a unique `id`, a clear `name`, and a short `desc`. Make sure every config key you use exists in `DEFAULT_CONFIG`.
 
-3. **Adding a config option:**
-   - Add the key + default to `DEFAULT_CONFIG`
-   - Add an entry to `SCHEMA` so it appears in `-c` editor
-   - Document it in `README.md` under the options table
-   - If it's preset-worthy, add a preset to `BUILTIN_PRESETS`
+Once you're done, open a pull request and describe what you changed and why.
 
-4. **Adding a preset:**
-   - Add it to `BUILTIN_PRESETS` in `matrix.py`
-   - Give it a unique `id`, a good `name`, and a descriptive `desc`
-   - Make sure all config keys you use exist in `DEFAULT_CONFIG`
-
-5. Test manually, open a PR, describe what you changed and why.
-
----
-
-## Commit message style
+## Commit Style
 
 Plain English, present tense, short:
 
 ```
-add rain_tilt config option
-fix title drift when ascii art has trailing spaces
-update Ghost Wave preset density
+add sparkle to Cyber Blue preset
+fix tilt spawn gap at screen edges
+update README install instructions
 ```
 
----
+## Code Style
 
-## Code style
-
-- Python 3.13, no dependencies beyond `rich` and `pyfiglet`
-- No linting or formatting enforced — just match the existing style
-- Keep section separators (`# ═══...`) around major blocks
-
----
+Python 3.13, no dependencies beyond `rich` and `pyfiglet`. No linting is enforced, just match the existing style. Keep the section separators (`# ═══...`) around major blocks.
 
 ## License
 
-By submitting a PR you agree your contribution is released under the [MIT License](LICENSE).
+By submitting a pull request you agree your contribution is released under the [MIT License](LICENSE).

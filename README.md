@@ -1,63 +1,38 @@
-# ░▒▓ MATRIX ▓▒░
+# Cascadia
 
-**A Matrix-style waterfall animation for your terminal.**  
-Full RGB color, 9 built-in presets, TUI config editor, standalone `.exe`.
+A terminal rain animation for Windows, Linux, and macOS. Pick a preset, tweak colors and effects through a built-in editor, and run it with one command.
 
-> **Disclaimer:** This is an independent personal project by [mietek64](https://github.com/mietek64).  
-> It is **not affiliated with, endorsed by, or related to** *The Matrix* film franchise,  
-> Warner Bros., Village Roadshow Pictures, or any associated rights holders.  
-> The name refers to the classic "digital rain" terminal aesthetic, not the movie.
+> This is an independent personal project by [mietek64](https://github.com/mietek64). It has no affiliation with Microsoft's Cascadia Code font, The Matrix film franchise, or any other product sharing the name. "Cascadia" here refers to the cascading digital rain aesthetic.
 
 ---
 
 ## Preview
 
-![matrix demo](preview.gif)
-
-
-Features: **full RGB color**, **9 built-in presets**, **wave / sparkle / tilt / glitch effects**,  
-**ASCII art title banners**, color cycling — all configurable through a TUI editor or plain JSON.
+![Cascadia demo](preview.gif)
 
 ---
 
 ## Install
 
-### Windows — automatic (recommended)
+### Windows
 
-**Option A — built-in installer** *(simplest)*
-
-1. Download **[matrix.exe](https://github.com/mietek64/Matrix/releases/latest/download/matrix.exe)**
-2. Open a terminal in the folder where you downloaded it and run:
-```powershell
- .\matrix.exe --install
-```
-This copies `matrix.exe` to `C:\tools\` and adds it to your PATH automatically.
-
-3. Open a **new** terminal → type `matrix` ✓
-
-**Option B — PowerShell one-liner** *(no manual download needed)*
+Download [cascadia.exe](https://github.com/mietek64/Cascadia/releases/latest/download/cascadia.exe) from the latest release, then run the built-in installer:
 
 ```powershell
-irm https://github.com/mietek64/Matrix/releases/latest/download/matrix.exe -OutFile matrix.exe; .\matrix.exe --install
+.\cascadia.exe --install
 ```
 
-**Option C — manual**
+This copies `cascadia.exe` to `C:\tools\` and adds it to your PATH. Open a new terminal and type `cascadia`.
 
-1. Download **[matrix.exe](https://github.com/mietek64/Matrix/releases/latest/download/matrix.exe)**
-2. Move it to any permanent folder — e.g. `C:\tools\`
-3. Press `Win + R` → type `sysdm.cpl` → **Advanced** → **Environment Variables** → **Path** → **Edit** → **New** → paste `C:\tools`
-4. Open a new terminal → type `matrix` ✓
+If you prefer to do it manually, move `cascadia.exe` to any permanent folder and add that folder to your PATH via `sysdm.cpl`.
 
-> **Antivirus note:** Windows Defender may flag PyInstaller-packaged executables.  
-> This is a known false positive with PyInstaller's bootloader — the full source is in this repo.  
-> Build it yourself from source if you prefer (see [Build from Source](#build-from-source)).
+### Linux and macOS
 
-### Linux / macOS — coming soon
+No pre-built binary yet. Run from source:
 
-Not yet available as a pre-built binary. You can run it from source:
 ```bash
 pip install rich pyfiglet
-python matrix.py -s
+python main.py -s
 ```
 
 ---
@@ -65,122 +40,114 @@ python matrix.py -s
 ## Usage
 
 ```
-matrix                  show help & live preview
-matrix -s               start the animation
-matrix -c               open config editor
-matrix -p               browse & run presets
-matrix -s -f theme.json start with a custom config file
+cascadia              show help and a live preview
+cascadia -s           start the rain animation
+cascadia -c           open the config editor
+cascadia -p           browse and run presets
+cascadia -s -f x.json start with a custom config file
+cascadia --install    copy to C:\tools\ and set up PATH (Windows)
 ```
 
-Press **Q** or **Ctrl-C** to quit the animation.
+Press `Q` or `Ctrl-C` to quit.
 
 ---
 
 ## Presets
 
-Run `matrix -p` to open the preset browser. Pick a number, press `r` to run or `s` to save as default.
+Run `cascadia -p` to open the preset browser. Pick a number, press `r` to run it or `s` to save it as your default.
 
 | Preset | Description |
 |--------|-------------|
-| Classic Matrix | Green katakana cascading through darkness |
+| Classic Matrix | Green katakana falling through darkness |
 | Cyber Blue | Cyan hex rain with sparkle |
 | Blood Rain | Slow crimson latin script |
 | Binary Storm | Dense white binary at full speed |
-| Ghost Wave | Dim katakana with vignette and rolling wave |
-| Neon Glitch | Magenta cycling hue — maximum chaos |
-| Tilt Cascade | Diagonal wind-blown green rain |
+| Ghost Wave | Dim katakana with vignette and a rolling wave |
+| Neon Glitch | Magenta hue cycling through chaos |
+| Tilt Cascade | Diagonal rain tilting right |
 | Deep Space | Sparse dark-green meditative rain |
 | Golden Code | Warm amber hex with slow hue drift |
 
-Save any config as a **custom preset** with `n` inside the preset browser.
+Press `n` in the browser to save your current config as a named preset.
 
 ---
 
 ## Configuration
 
-Config is created automatically at first save:
-- **Windows:** `%APPDATA%\matrix\config.json`
-- **Linux/macOS:** `~/.config/matrix/config.json`
+Cascadia creates its config automatically the first time you save from the editor. You can find it at:
 
-Edit it with the built-in editor (`matrix -c`) or any text editor. All keys and their meaning:
+- Windows: `%APPDATA%\cascadia\config.json`
+- Linux/macOS: `~/.config/cascadia/config.json`
+
+Run `cascadia -c` to edit it interactively, or open the JSON file in any text editor.
+
+### All options
 
 | Key | Default | Description |
 |-----|---------|-------------|
-| `chars` | `katakana` | `katakana` `latin` `numbers` `binary` `symbols` `hex` `mixed` `custom` |
-| `custom_chars` | `""` | Your own character string (only used when `chars = custom`) |
-| `color` | `#00cc44` | Stream color — Rich name, `#rrggbb`, or `rgb(r,g,b)` |
+| `chars` | `katakana` | Character set: `katakana` `latin` `numbers` `binary` `symbols` `hex` `mixed` `custom` |
+| `custom_chars` | `""` | Your own character string, used when `chars` is set to `custom` |
+| `color` | `#00cc44` | Stream color. Accepts Rich color names, `#rrggbb`, or `rgb(r,g,b)` |
 | `head_color` | `bright_white` | Color of the leading character on each stream |
-| `speed` | `0.05` | Seconds per frame — lower = faster (0.01–0.50) |
-| `density` | `0.04` | Stream spawn probability per column per tick (0–0.30) |
-| `trail_length` | `20` | Characters per falling stream (3–80) |
-| `head_bright` | `true` | Render leading character in `head_color` |
-| `glitch` | `true` | Random ambient stray characters |
-| `glitch_chance` | `0.02` | Glitch intensity (0.001 subtle → 0.20 chaos) |
-| `sparkle` | `false` | Stream cells randomly flash bright |
+| `speed` | `0.05` | Seconds per frame. Lower is faster (range: 0.01 to 0.50) |
+| `density` | `0.04` | Stream spawn probability per column per tick (0 to 0.30) |
+| `trail_length` | `20` | Characters per falling stream (3 to 80) |
+| `glitch` | `true` | Adds random stray characters across the screen |
+| `glitch_chance` | `0.02` | Glitch intensity (0.001 = subtle, 0.20 = heavy) |
+| `sparkle` | `false` | Randomly flashes stream cells bright |
 | `sparkle_chance` | `0.04` | Fraction of stream cells that sparkle per frame |
-| `fade_edges` | `false` | Vignette — dims streams near screen edges |
+| `fade_edges` | `false` | Dims streams near the screen edges |
 | `wave` | `false` | Sinusoidal density ripple across columns |
-| `wave_speed` | `1.0` | Wave travel speed (0.1–10.0) |
-| `rain_tilt` | `0` | Diagonal slant (−5 left → 0 straight → 5 right) |
-| `color_cycle` | `false` | Slowly rotate stream hue over time |
-| `color_cycle_speed` | `0.5` | Hue rotation speed (0.05–5.0) |
-| `title` | `""` | Text shown on screen (empty = hidden) |
-| `title_position` | `top-center` | `top-left` `top-center` `top-right` `center-center` |
-| `title_style` | `text` | `text` or `ascii` (ASCII art via pyfiglet) |
-| `ascii_font` | `standard` | Figlet font name — e.g. `doom` `big` `slant` |
-| `ascii_size` | `medium` | Font group fallback: `small` `medium` `large` |
-| `title_color` | `""` | Title text color (empty = stream color) |
-| `title_bg` | `""` | Title background (empty = black) |
-| `exit_hint` | `true` | Show `Q quit` hint in bottom-right corner |
+| `wave_speed` | `1.0` | Wave travel speed (0.1 = slow, 10.0 = fast) |
+| `rain_tilt` | `0` | Diagonal slant (-5 = left, 0 = straight, 5 = right) |
+| `color_cycle` | `false` | Slowly rotates the stream hue over time |
+| `color_cycle_speed` | `0.5` | Hue rotation speed (0.05 = slow, 5.0 = fast) |
+| `title` | `""` | Text displayed on screen. Leave empty to hide |
+| `title_position` | `top-center` | `top-left`, `top-center`, `top-right`, or `center-center` |
+| `title_style` | `text` | `text` for a plain label, `ascii` for figlet art (requires pyfiglet) |
+| `ascii_font` | `standard` | Figlet font name, for example `doom`, `big`, or `slant` |
+| `ascii_size` | `medium` | Font group fallback: `small`, `medium`, or `large` |
+| `title_color` | `""` | Title text color. Leave empty to use the stream color |
+| `exit_hint` | `true` | Shows a `Q quit` hint in the bottom-right corner |
 
 ---
 
 ## Build from Source
 
-Requires **Python 3.13**.
+You need Python 3.13.
+
+**Windows:**
 
 ```powershell
-# Install dependencies
 py -3.13 -m pip install pyinstaller pyfiglet rich
 
-# Build (Windows — run as one command)
-py -3.13 -m PyInstaller --onefile --console --name matrix `
-  --hidden-import pyfiglet --hidden-import pyfiglet.fonts --hidden-import rich `
-  "--add-data=$(py -3.13 -c 'import pyfiglet,os;print(os.path.dirname(pyfiglet.__file__))');pyfiglet" `
-  --exclude-module tkinter --exclude-module unittest `
-  --exclude-module email --exclude-module http `
-  matrix.py
+py -3.13 -m PyInstaller --onefile --console --name cascadia --collect-all rich --collect-all pyfiglet --hidden-import pyfiglet --hidden-import pyfiglet.fonts --exclude-module tkinter --exclude-module unittest --exclude-module email --exclude-module http main.py
 ```
+
+**Linux / macOS:**
 
 ```bash
-# Linux / macOS
 python3.13 -m pip install pyinstaller pyfiglet rich
 
-python3.13 -m PyInstaller --onefile --console --name matrix \
-  --hidden-import pyfiglet --hidden-import pyfiglet.fonts --hidden-import rich \
-  --add-data "$(python3.13 -c 'import pyfiglet,os;print(os.path.dirname(pyfiglet.__file__))'):pyfiglet" \
-  --exclude-module tkinter --exclude-module unittest \
-  --exclude-module email --exclude-module http \
-  matrix.py
+python3.13 -m PyInstaller --onefile --console --name cascadia --collect-all rich --collect-all pyfiglet --hidden-import pyfiglet --hidden-import pyfiglet.fonts --exclude-module tkinter --exclude-module unittest --exclude-module email --exclude-module http main.py
 ```
 
-Output: `dist/matrix.exe` (Windows) or `dist/matrix` (Linux/macOS).
+The output lands at `dist/cascadia.exe` on Windows or `dist/cascadia` on Linux and macOS.
 
 ---
 
 ## Project Structure
 
 ```
-Matrix/
-├── matrix.py              main script (all logic in one file)
-├── config.json            default config template
-├── pyproject.toml         package metadata
+Cascadia/
+├── main.py            the whole program, one file
+├── config.json        default config template
+├── pyproject.toml     package metadata
 ├── README.md
 ├── LICENSE
 ├── SECURITY.md
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md
-├── preview.gif
 └── .gitignore
 ```
 
@@ -188,8 +155,6 @@ Matrix/
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
 
----
-
-*This project is not affiliated with The Matrix franchise. "Matrix rain" is a well-established term in the terminal/CLI community for this style of animation.*
+*Cascadia is not affiliated with Microsoft, The Matrix franchise, or any other product using the Cascadia name.*
